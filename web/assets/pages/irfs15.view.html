@@ -1,0 +1,54 @@
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col">
+
+            <br>
+            <h1 class="h3 mb-3 fw-normal">IRFS 15 Result</h1>
+
+            <!-- Non-editable field for Implicit Discount Rate -->
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-8 col-xs-12">
+                    <div class="form-group mb-3">
+                        <label for="implicitDiscountRate">Implicit Discount Rate</label>
+                        <input type="text" class="form-control" id="implicitDiscountRate" ng-model="imp_disc_rate" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table starts here -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Ano</th>
+                        <th scope="col">Saldo</th>
+                        <th scope="col">Adição</th>
+                        <th scope="col">Remuneração</th>
+                        <th scope="col">Baixa</th>
+                        <th scope="col">Saldo Final</th>
+                    </tr>
+                </thead>
+                <tbody ng-model="table">
+                    <tr ng-repeat="x in records">
+                        <th scope="row">{{x.year}}</th>
+                        <td>{{x.initial_balance}}</td>
+                        <td>{{x.addition}}</td>
+                        <td>{{x.returns}}</td>
+                        <td>{{x.withdraw}}</td>
+                        <td>{{x.final_balance}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="row">Totals</th>
+                        <td>-</td>
+                        <td>{{totalAddition}}</td>
+                        <td>{{totalReturns}}</td>
+                        <td>{{totalWithdraw}}</td>
+                        <td>-</td>
+                    </tr>
+                </tfoot>    
+            </table>
+            <!-- Table ends here -->
+        </div>
+    </div>
+</div>

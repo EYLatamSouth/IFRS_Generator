@@ -1,0 +1,52 @@
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col">
+
+            <br>
+            <h1 class="h3 mb-3 fw-normal">IRFS 15 calculator</h1>
+
+            <div class="form-floating "></div>
+                <input class="form-control" ng-change="updateInitialBalance()" id="entry_date" ng-model="newInput.entry_date" placeholder="entry date" type="date">
+                <label form="entry_date">Data do Laçamento</label>
+            </div>
+            <div class="form-floating ">
+                <input id="initial_balance"
+                    class="form-control " value="{{initial_balance|currency:'R$ '}}" disabled >
+                <label form="initial_balance">Saldo Inicial</label>
+            </div>
+            <div class="form-floating">
+                <input ng-change="validateImpDiscRate()" ng-model="newInput.imp_disc_rate" id="imp_disc_rate" placeholder="input the Implicit Discount Rate" class="form-control"
+                    type="text" required>
+                <label for="imp_disc_rate">Implicit Discount Rate</label>
+            </div>
+            
+            <div class="form-floating">
+                <input ng-change="calculate()" ng-input-currency ng-model="newInput.addition" id="addition" placeholder="input the value to be added" class="form-control"
+                    type="text">
+                <label form="addition">Adição</label>
+            </div>
+            <div class="form-floating ">
+                <input id="returns" placeholder="reference value" ng-input-currency ng-model="newInput.returns"
+                    class="form-control " value="{{newInput.returns|currency:'R$ '}}" disabled >
+                <label form="returns">Remuneração</label>
+            </div>
+            <div class="form-floating">
+                <input ng-change="calculate()" ng-input-currency ng-model="newInput.withdraw" id="withdraw" placeholder="input the value to be withdrawn" class="form-control"
+                    type="text">
+                <label form="withdraw">Baixa</label>
+            </div>
+            <!-- Input fields -->
+             <div class="form-floating ">
+                <input id="final_balance" ng-input-currency ng-model="newInput.final_balance" placeholder="final balance"
+                    class="form-control " value="{{newInput.final_balance|currency:'R$ '}}" disabled >
+                <label form="final_balance">Saldo Final</label>
+            </div>
+            <br>
+            <div>
+                <button class="w-50 btn btn-lg btn-primary" ng-click="save()">Save</button>
+            </div>
+        </div>
+    </div>
+    {{myvehicle}}<br>
+    {{description}}
+</div>

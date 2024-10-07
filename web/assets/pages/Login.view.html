@@ -1,0 +1,32 @@
+<div class="container-fluid ">
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-8   border-start ">
+            <form>
+                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" ng-model="user.email">
+                    <label for="floatingInput">Email address</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" ng-model="user.passwd">
+                    <label for="floatingPassword">Password</label>
+                </div>
+                <!--
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                -->
+                <button class="w-100 btn btn-lg btn-primary" ng-click="exec()">Sign in</button>
+                <p class="mt-5 mb-3 text-muted">&copy; 2017–2024</p>
+            </form>
+        </div>
+        <div class="col-md-4 justify-content-center  border-start">
+            <img src="../assets/images/logo.webp" alt="Logo __TITLE__" class="top-50 start-50 ">
+        </div>
+    </div>
+</div>

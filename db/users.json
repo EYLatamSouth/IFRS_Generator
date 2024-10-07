@@ -1,0 +1,21 @@
+[
+    {
+        "_id": {
+            "$oid": "6651402636a417b0d14a2400"
+        },
+        "email": "pedro.leao@gmail.com",
+        "passwd": "bd85c4cfdee236edec3e0d1d5e6dff4ct",
+        "created_at": "2024-05-25T01:34:30.091Z",
+        "change_passwd": false,
+        "cnpj": 0
+    },
+    {
+        "_id": {
+            "$oid": "66f6f3cc0cef82b25f997913"
+        },
+        email: "gabriel@gmail.com",
+        passwd: "912ec803b2ce49e4a541068d495ab570g",
+        change_passwd: false,
+        cnpj: 0
+    }
+]

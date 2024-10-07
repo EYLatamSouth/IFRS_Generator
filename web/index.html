@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <title>__TITLE__</title>
+    <meta charset="utf-8">
+    <meta name="description" content="__CONTENT_DESCRIPTION__">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#212529">
+    <link rel="icon" sizes="192x192" href="assets/images/icon.webp">
+</head>
+
+<body ng-app="application" style="position:relative;text-align: center;background-image: url('assets/images/fundo.webp');height: 100vh;"
+    data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="30">
+
+    <!-- HEADER -->
+    <div class="container-fluid p-5 bg-dark text-white">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top opacity-75">
+            <div class="container-fluid">
+                <a href="#">
+                    <img class="navbar-brand img-thumbnail bg-dark mx-auto border-dark w-50"
+                        src="assets/images/logo.webp" alt="logo __TITLE__">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="navbar-item">
+                            <a class="nav-link" aria-current="cars" href="#!irfs15.input.login">
+                                <i >Ingressar IRFS 15</i>
+                            </a>
+                        </li>
+                        <li class="navbar-item">
+                            <a class="nav-link" href="#!irfs15.login">
+                                <i >IRFS 15</i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- CONTAINER -->
+    <div ng-view></div><br>
+
+</body>
+
+<!-- bootstrap -->
+<!-- CSS -->
+<link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+<link href="node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+
+<!-- Scripts -->
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+<!-- angularjs scripts -->
+<script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/angular-route/angular-route.js"></script>
+<!-- <script src="node_modules/fipe-promise/dist/fipe-promise.js"></script> -->
+<script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
+<script src="node_modules/ng-input-currency/dist/ng-input-currency.js"></script>
+<!-- application custom scripts -->
+<script src="assets/js/Config.js"></script>
+<script src="assets/js/ConfServices.js"></script>
+<script src="assets/js/CtrlStart.js"></script>
+<script src="assets/js/CtrlLogin.js"></script>
+<script src="assets/js/CtrlVehicleRegistration.js"></script>
+<script src="assets/js/CtrlIrfs15.js"></script>
+
+</html>
