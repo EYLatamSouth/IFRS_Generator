@@ -21,8 +21,8 @@ function get_records(d) {
         });
         currBalance += element.addition + (element.addition * d.imp_disc_rate / 100) - element.withdraw;
     });
-    console.log(records);
-    return records;
+
+    return records.sort((a, b) => a.year - b.year);
 }
 
 (() => {
