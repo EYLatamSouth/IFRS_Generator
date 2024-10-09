@@ -1,5 +1,4 @@
 function get_records(d) {
-    console.log(d);
     if (!d) {
         return [];
     }
@@ -28,25 +27,40 @@ function get_records(d) {
 (() => {
     'use stricts';
 
-    function ctrl($scope, $login, $get_company) {
+    function ctrl($scope, $login, $get_company, $get_all_companies) {
         if (!$login.check()) {
             $login.redirect();
         }
         $scope.imp_disc_rate = 0;
         $scope.records = [];
 
-        $get_company.on($login.check()).then(d => {
-            $scope.imp_disc_rate = d.imp_disc_rate;
-            $scope.records = get_records(d);
-            $scope.totalAddition = d.entry.reduce((acc, cur) => acc + cur.addition, 0);
-            $scope.totalReturns = d.entry.reduce((acc, cur) => acc + cur.addition * d.imp_disc_rate / 100, 0);
-            $scope.totalWithdraw = d.entry.reduce((acc, cur) => acc + cur.withdraw, 0);
+        $get_all_companies.on($login.check()).then(d => {
+            let entries = [];
+            d.forEach(x => {
+                entries.push(x.name + " - " + x.cnpj);
+            });
+
+            $scope.companies = entries;
         });
+
+        $scope.initialLoad = () => {
+            if (!$scope.selectedCompany) {
+                return;
+            }
+            const cnpj = $scope.selectedCompany.split(" ")[2];
+            $get_company.on($login.check(), cnpj).then(d => {
+                $scope.imp_disc_rate = d.imp_disc_rate;
+                $scope.records = get_records(d);
+                $scope.totalAddition = d.entry.reduce((acc, cur) => acc + cur.addition, 0);
+                $scope.totalReturns = d.entry.reduce((acc, cur) => acc + cur.addition * d.imp_disc_rate / 100, 0);
+                $scope.totalWithdraw = d.entry.reduce((acc, cur) => acc + cur.withdraw, 0);
+            });
+        }
     }
 
     angular
         .module('application')
         .controller('Irfs15', ctrl);
 
-    ctrl.$inject = ['$scope', '$login', '$get_company'];
+    ctrl.$inject = ['$scope', '$login', '$get_company', '$get_all_companies'];
 })();

@@ -6,6 +6,13 @@
             <h1 class="h3 mb-3 fw-normal">IRFS 15 Result</h1>
 
             <!-- Non-editable field for Implicit Discount Rate -->
+            <div class="form-floating">
+                <select ng-model="selectedCompany" id="type" placeholder="Select the company" class="form-select"
+                    ng-change="initialLoad()" required>
+                    <option ng-repeat="value in companies">{{value}}</option>
+                </select>
+                <label for="type">Empresas</label>
+            </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-8 col-xs-12">
                     <div class="form-group mb-3">
@@ -46,7 +53,7 @@
                         <td>{{totalWithdraw}}</td>
                         <td>-</td>
                     </tr>
-                </tfoot>    
+                </tfoot>
             </table>
             <!-- Table ends here -->
         </div>
