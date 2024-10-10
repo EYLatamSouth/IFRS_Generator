@@ -1,27 +1,55 @@
 function get_records(d) {
-    if (!d) {
+    if (!d || d.entry.length === 0) {
         return [];
     }
-    if (d.entry.length === 0) {
-        return [];
-    }
-    let records = [];
+
+    let recordsByYear = {};
     let currBalance = 0;
+
     d.entry.forEach(element => {
+        let year = element.entry_date.split("-")[0];
         let returns = element.addition * d.imp_disc_rate / 100;
         let final_balance = currBalance + element.addition + returns - element.withdraw;
-        records.push({
-            year: element.year,
+
+        if (!recordsByYear[year]) {
+            recordsByYear[year] = {
+                year: year,
+                initial_balance: 0,
+                addition: 0,
+                returns: 0,
+                withdraw: 0,
+                final_balance: 0,
+                details: []
+            };
+        }
+
+        recordsByYear[year].addition += element.addition;
+        recordsByYear[year].returns += returns;
+        recordsByYear[year].withdraw += element.withdraw;
+        recordsByYear[year].final_balance = final_balance;
+
+        recordsByYear[year].details.push({
+            month: element.entry_date.split("-")[1],
             initial_balance: currBalance != 0 ? currBalance : "-",
             addition: element.addition,
             returns: returns,
             withdraw: element.withdraw,
-            final_balance: final_balance
+            final_balance: final_balance,
         });
-        currBalance += element.addition + (element.addition * d.imp_disc_rate / 100) - element.withdraw;
+
+        currBalance = final_balance;
     });
 
-    return records.sort((a, b) => a.year - b.year);
+    let sortedYears = Object.keys(recordsByYear).sort();
+    let previousFinalBalance = 0;
+    sortedYears.forEach(year => {
+        recordsByYear[year].initial_balance = previousFinalBalance;
+        previousFinalBalance = recordsByYear[year].final_balance;
+    });
+
+    let records = sortedYears.map(year => recordsByYear[year]);
+
+    return records;
 }
 
 (() => {
@@ -56,6 +84,11 @@ function get_records(d) {
                 $scope.totalWithdraw = d.entry.reduce((acc, cur) => acc + cur.withdraw, 0);
             });
         }
+
+        $scope.selectYear = (year) => {
+            $scope.selectedYear = year;
+            $scope.details = $scope.records.filter(x => x.year == year)[0].details;
+        };
     }
 
     angular
