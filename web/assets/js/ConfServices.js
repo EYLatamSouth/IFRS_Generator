@@ -60,7 +60,7 @@
                 url: api + new_entry.company._id,
                 headers: new_entry.token,
                 data: {
-                    year: new_entry.entry_date,
+                    entry_date: new_entry.entry_date,
                     addition: new_entry.addition,
                     withdraw: new_entry.withdraw
                 }
