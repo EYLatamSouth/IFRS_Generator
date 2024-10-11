@@ -7,9 +7,9 @@ const entrySchema = new Schema({
         type: Date,
         default: Date.now
     },
-    year: {
-        type: Number,
-        default: Date.now.year
+    entry_date: {
+        type: Date,
+        default: Date.now
     },
     addition: {
         type: Number,
