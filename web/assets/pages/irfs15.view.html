@@ -6,6 +6,13 @@
             <h1 class="h3 mb-3 fw-normal">IRFS 15 Result</h1>
 
             <!-- Non-editable field for Implicit Discount Rate -->
+            <div class="form-floating">
+                <select ng-model="selectedCompany" id="type" placeholder="Select the company" class="form-select"
+                    ng-change="initialLoad()" required>
+                    <option ng-repeat="value in companies">{{value}}</option>
+                </select>
+                <label for="type">Empresas</label>
+            </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-8 col-xs-12">
                     <div class="form-group mb-3">
@@ -15,7 +22,6 @@
                 </div>
             </div>
 
-            <!-- Table starts here -->
             <table class="table">
                 <thead>
                     <tr>
@@ -25,6 +31,7 @@
                         <th scope="col">Remuneração</th>
                         <th scope="col">Baixa</th>
                         <th scope="col">Saldo Final</th>
+                        <th scope="col">Detalhes</th>
                     </tr>
                 </thead>
                 <tbody ng-model="table">
@@ -35,6 +42,10 @@
                         <td>{{x.returns}}</td>
                         <td>{{x.withdraw}}</td>
                         <td>{{x.final_balance}}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                data-bs-target="#detailsModal" ng-click="selectYear(x.year)">Entradas</button>
+                        </td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -45,10 +56,52 @@
                         <td>{{totalReturns}}</td>
                         <td>{{totalWithdraw}}</td>
                         <td>-</td>
+                        <td>-</td>
                     </tr>
-                </tfoot>    
+                </tfoot>
             </table>
-            <!-- Table ends here -->
+
+            <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="detailsModalLabel">Monthly Breakdown for {{selectedYear}}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Mês</th>
+                                        <th scope="col">Saldo</th>
+                                        <th scope="col">Adição</th>
+                                        <th scope="col">Remuneração</th>
+                                        <th scope="col">Baixa</th>
+                                        <th scope="col">Saldo Final</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="detail in details">
+                                        <th scope="row">{{detail.month}}</th>
+                                        <td>{{detail.initial_balance}}</td>
+                                        <td>{{detail.addition}}</td>
+                                        <td>{{detail.returns}}</td>
+                                        <td>{{detail.withdraw}}</td>
+                                        <td>{{detail.final_balance}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
         </div>
     </div>
 </div>

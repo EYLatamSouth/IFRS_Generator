@@ -13,7 +13,7 @@
             console.log(basicToken);
             console.log(user.email);
             console.log(user.passwd);
-            $http({ 
+            $http({
                 method: 'GET',
                 url: api,
                 headers: {
@@ -60,7 +60,7 @@
                 url: api + new_entry.company._id,
                 headers: new_entry.token,
                 data: {
-                    year: new_entry.entry_date.getFullYear(),
+                    year: new_entry.entry_date,
                     addition: new_entry.addition,
                     withdraw: new_entry.withdraw
                 }
@@ -74,8 +74,29 @@
 
     function get_company($http, $interval) {
 
+        const api = 'v1/company/cnpj/';
+
+
+        this.on = (headers, cnpj) => {
+
+            return $http({
+                method: 'GET',
+                url: api + cnpj,
+                headers: headers
+            })
+            .then(r => (r.status === 200) ? r.data : null)
+            .then(d => {
+                return d[0];
+            });
+        };
+
+
+    };
+
+    function get_all_companies($http, $interval) {
+
         const api = 'v1/company';
-        
+
 
         this.on = headers => {
 
@@ -86,17 +107,18 @@
             })
             .then(r => (r.status === 200) ? r.data : null)
             .then(d => {
-                return d[0];
+                return d;
             });
         };
 
-        
+
     };
 
     angular
         .module('application')
         .service('$login', login)
         .service('$save_entry', save_entry)
+        .service('$get_all_companies', get_all_companies)
         .service('$get_company', get_company);
         // .service('$register_company', register_company);
 
